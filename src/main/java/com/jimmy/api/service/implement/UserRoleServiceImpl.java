@@ -23,7 +23,7 @@ public class UserRoleServiceImpl implements IUserRoleService {
 
     @Override
     public List<RoleDTO> getRolesByUserId(UUID userId) {
-        // 1. Verificar que el usuario existe
+        // 1. Verificar que el usuario sera que existe?
         userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User no encontrado: " + userId));
 
