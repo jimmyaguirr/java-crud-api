@@ -1,0 +1,10 @@
+target/
+*.class
+.idea/
+*.iml
+*.iws
+*.ipr
+src/main/resources/application.properties
+*.log
+.DS_Store
+Thumbs.db
