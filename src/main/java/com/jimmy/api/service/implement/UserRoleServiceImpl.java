@@ -23,14 +23,14 @@ public class UserRoleServiceImpl implements IUserRoleService {
 
     @Override
     public List<RoleDTO> getRolesByUserId(UUID userId) {
-        // 1. Verificar que el usuario sera que existe?
+        // 1. Verify that the user exists
         userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User no encontrado: " + userId));
 
-        // 2. Buscar en la pivote todos los roles del usuario
+        // 2. Search the pivot table for all user roles
         List<UserRole> userRoles = userRoleRepository.findByUserId(userId);
 
-        // 3. Convertir a DTO
+        // 3. Convert to DTO
         return userRoles.stream()
                 .map(userRole -> {
                     Role role = roleRepository.findById(userRole.getRoleId())
@@ -42,14 +42,14 @@ public class UserRoleServiceImpl implements IUserRoleService {
 
     @Override
     public UserRole assignRole(UUID userId, UUID roleId) {
-        // 1. Verificar que existen ambos
+        // 1. Verify that both exist
         userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User no encontrado: " + userId));
 
         roleRepository.findById(roleId)
                 .orElseThrow(() -> new RuntimeException("Role no encontrado: " + roleId));
 
-        // 2. Crear el registro en la pivote
+        // 2. Create the record in the pivot
         UserRole userRole = new UserRole();
         userRole.setUserId(userId);
         userRole.setRoleId(roleId);
